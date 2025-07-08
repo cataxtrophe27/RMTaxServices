@@ -8,27 +8,32 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body class="light">
+  <div id="loader"></div>
 <div class="actions">
   <!-- Dark Mode Toggle -->
   <button id="mode-toggle" class="mode-toggle"><i class="fas fa-moon"></i></button></div>
-  <header>
-    <div class="container">
-      <a href="#home" class="logo">
-        <img src="assets/img/logoo.png" alt="RM Tax Services Logo">
-      </a>
-  <!-- Hamburger -->
-  <button id="hamburger" class="hamburger"><i class="fas fa-bars"></i></button>
-</div>
-      <nav>
+<header>
+  <div class="container">
+    <!-- Logo + Brand Name -->
+    <a href="#home" class="logo-brand">
+      <img src="assets/img/logoo.png" alt="RM Tax Services Logo">
+      <span class="brand-text">RM Tax Services LLC</span>
+    </a>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="hamburger"><i class="fas fa-bars"></i></button>
+
+    <!-- Navigation -->
+    <nav>
       <ul class="nav-links" id="navLinks">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
   <!-- HERO SECTION -->
   <section id="home" class="hero">
@@ -91,8 +96,34 @@
         <p><em>Let us handle the paperwork—so you can handle your purpose.</em></p>
       </div>
     </div>
-  </section>
+    
+<div class="about-card business-card">
+  <div class="business-card-content">
+    
+    <!-- Left side: image + contact -->
+    <div class="business-card-left">
+<img src="assets/img/Screenshot 2025-07-03 083508.png" alt="RM Tax Services Business Card" class="business-card-image" id="clickImage">
 
+      <div class="business-card-contact">
+        <p><i class="fas fa-phone"></i> 702-786-2970</p>
+        <p><i class="fas fa-envelope"></i> radamos23@gmail.com</p>
+<p><i class="fas fa-map-marker-alt"></i> 1500 East Tropicana Avenue, <br> Suite 151 Las Vegas, Nevada 89119</p>
+      </div>
+    </div>
+
+    <!-- Right side: intro -->
+    <div class="business-card-info">
+      <h4>Remy Adamos</h4>
+      <p>Hi, I’m <strong>Remy Adamos</strong>, a dedicated Registered Tax Preparer with a passion for helping people stay financially organized and confident. I understand how overwhelming taxes, registrations, and paperwork can be—and that’s exactly why I’m here.</p>
+      <br />
+      <p>Whether you're an individual, a small business owner, or managing a growing company, I take pride in offering personalized, accurate, and dependable support. My goal is to simplify the process for you, so you can focus more on what matters most.</p>
+      <br />
+      <p>Let’s work together to make your finances clearer, your documents in order, and your stress levels lower. I’m here to help—every step of the way.</p>
+    </div>
+  </div>
+</div>
+  </section>
+<div class="full-section-divider"></div>
   <!-- CONTACT SECTION -->
   <section id="contact" class="content-section contact fade-in">
     <div class="container">
@@ -137,15 +168,45 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <img src="assets/img/logoo.png" alt="RM Tax Services Logo" style="max-height: 60px; margin-bottom: 10px;" />
-      <p>&copy; 2025 RM Tax Services. All rights reserved.</p>
+<footer>
+  <div class="container">
+    <img src="assets/img/logoo.png" alt="RM Tax Services Logo" style="height: 50px;">
+    
+    <div class="footer-links">
+    <a href="javascript:void(0);" onclick="openFAQ()">FAQ</a>
+<a onclick="openModal('servicesModal')">Services</a>
+<a onclick="openModal('contactModal')">Contact</a>
+    <a onclick="openModal('privacyModal')">Privacy Policy</a>
+    <a onclick="openModal('termsModal')">Terms of Service</a>
     </div>
-  </footer>
+
+    <p>&copy; 2025 RM Tax Services LLC. All rights reserved.</p>
+  </div>
+</footer>
 
 <!-- Scripts -->
 <script>
+ document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("imageModal");
+    const img = document.getElementById("clickImage");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.querySelector(".close");
+
+    img.addEventListener("click", function () {
+      modal.style.display = "flex";
+      modalImg.src = this.src;
+    });
+
+    closeBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  });
   // Form submission
   const form = document.querySelector('.contact-form');
   form.addEventListener('submit', function (e) {
@@ -306,11 +367,188 @@
       setTimeout(typeLoop, isDeleting ? 30  : 60); // typing/deleting speed
     }
   }
+window.addEventListener('load', () => {
+  document.getElementById('loader').style.display = 'none';
+});
 
+window.addEventListener('scroll', () => {
+  const header = document.querySelector('header');
+  if(window.scrollY > 30) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+});
   // Start typing
   typeLoop();
-</script>
+  // FAQ 
+  function openFAQ() {
+    document.getElementById("faqOverlay").classList.add("active");
+  }
 
+  function closeFAQ() {
+    document.getElementById("faqOverlay").classList.remove("active");
+  }
+  window.addEventListener("click", function(e) {
+  const modal = document.getElementById("faqOverlay");
+  if (e.target === modal) {
+    closeFAQ();
+  }
+});
+ // TERMS OF SERVICES & PRIVACY POLICY
+  function openModal(id) {
+    document.getElementById(id).style.display = "flex";
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+  }
+  
+
+  // Optional: Close modal when clicking outside the box
+  window.onclick = function(e) {
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+      if (e.target === modal) modal.style.display = "none";
+    });
+  }
+
+
+  function openModal(id) {
+    document.getElementById(id).style.display = "flex";
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+  }
+
+  window.onclick = function(event) {
+    const modals = document.querySelectorAll('.overlay-modal');
+    modals.forEach(modal => {
+      if (event.target === modal) modal.style.display = "none";
+    });
+  }
+</script>
+<!-- Modal for Enlarged Image -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+<!-- FAQ Overlay -->
+<div id="faqOverlay" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeFAQ()">&times;</span>
+    <h3><i class="fas fa-question-circle gradient-icon"></i> Frequently Asked Questions</h3>
+
+    <div class="faq-item">
+      <h4>1. What services do you offer?</h4>
+      <p>We provide a wide range of services including:</p>
+      <ul>
+        <li>Individual & business tax preparation</li>
+        <li>Notary public services</li>
+        <li>Business registration and formation</li>
+        <li>Divorce documentation assistance</li>
+        <li>Other general documentation support</li>
+      </ul>
+    </div>
+
+    <div class="faq-item">
+      <h4>2. Where are you located?</h4>
+      <p>📍 1500 East Tropicana Avenue, Suite 151, Las Vegas, Nevada 89119</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>3. Do I need to schedule an appointment?</h4>
+      <p>Appointments are recommended to ensure we can give you dedicated time and attention, but walk-ins are welcome during business hours when available.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>4. What documents should I bring for tax filing?</h4>
+      <p>You’ll typically need:</p>
+      <ul>
+        <li>Valid ID</li>
+        <li>Social Security cards (for you and dependents)</li>
+        <li>W-2s, 1099s, and other income statements</li>
+        <li>Proof of expenses/deductions (e.g. receipts, 1098s, etc.)</li>
+      </ul>
+    </div>
+
+    <div class="faq-item">
+      <h4>5. How much do your services cost?</h4>
+      <p>Pricing depends on the complexity of your request. We offer competitive and transparent pricing — feel free to contact us for a free estimate.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>6. Are your services available online or remotely?</h4>
+      <p>Yes! We offer secure remote tax preparation and document processing for your convenience.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>7. Do you help with past tax returns or IRS issues?</h4>
+      <p>Absolutely. We can assist with prior-year tax returns, amendments, and IRS correspondence.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>8. Can you help me register a new business?</h4>
+      <p>Yes, we offer business formation services including LLC registrations, EIN applications, and more.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>9. Is RM Tax Services LLC licensed and insured?</h4>
+      <p>Yes. We are a registered and insured service provider with experienced professionals ready to help you.</p>
+    </div>
+
+    <div class="faq-item">
+      <h4>10. What are your business hours?</h4>
+      <p>🕒 Monday to Friday: 8:00 AM – 5:00 PM<br>
+      (Saturday and Sundays by appointment only)</p>
+    </div>
+  </div>
+</div>
+<div id="servicesModal" class="overlay-modal">
+  <div class="modal-content-box">
+    <span class="close-modal" onclick="closeModal('servicesModal')">&times;</span>
+    <h2>🧾 Our Services</h2>
+    <ul>
+      <li>✅ Individual & Business Tax Preparation</li>
+      <li>✅ Notary Public Services</li>
+      <li>✅ Accounting Services</li>
+      <li>✅ Business Registration and Formation</li>
+      <li>✅ Divorce Documentation Assistance</li>
+      <li>✅ Other General Documentation Support</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="overlay-modal">
+  <div class="modal-content-box">
+    <span class="close-modal" onclick="closeModal('contactModal')">&times;</span>
+    <h2>📞 Contact Us</h2>
+    <p><strong>Phone:</strong> 702-470-7135</p>
+    <p><strong>Email:</strong> RMservices88888@gmail.com</p>
+    <p><strong>Address:</strong><br>1500 East Tropicana Avenue, Suite 151<br>Las Vegas, Nevada 89119</p>
+    <p><strong>Business Hours:</strong><br>Monday – Friday: 8:00 AM – 5:00 PM<br>(Saturday and Sundays by appointment)</p>
+  </div>
+</div>
+<!-- Privacy Policy Modal -->
+<div id="privacyModal" class="overlay-modal">
+  <div class="modal-content-box">
+    <span class="close-modal" onclick="closeModal('privacyModal')">&times;</span>
+    <h2>🔐 Privacy Policy</h2>
+    <p>RM Tax Services LLC respects and protects your privacy. All personal information collected through our website or services is used strictly for communication, scheduling, and service delivery purposes. We do not sell, rent, or disclose your personal information to third parties unless legally required.</p>
+    <p><br>We use secure and encrypted technologies to store and manage your information, ensuring your data remains private and protected at all times.</p>
+  </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div id="termsModal" class="overlay-modal">
+  <div class="modal-content-box">
+    <span class="close-modal" onclick="closeModal('termsModal')">&times;</span>
+    <h2>📄 Terms of Service</h2>
+    <p>By accessing or using our website and services, you agree to abide by the terms and conditions set by RM Tax Services LLC. Our services are rendered based on the accuracy of the information you provide. It is your responsibility to ensure that all submitted data is truthful and complete.</p>
+    <p><br>We reserve the right to update service offerings, pricing, availability, and terms at any time without prior notice. All payments must be completed within the agreed timelines. Failure to comply may result in delays or termination of services.</p>
+  </div>
+</div>
 </body>
 </html>
-
